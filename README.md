@@ -100,19 +100,19 @@ The **fields** of store-and-forward model object *struct* are
 
 >Example: *Load the Chania urban road network provided in SAFFRON*
 >```
->>> chania = SFMSynthesis('ChaniaUrbanRoadModel');% Load Chania, Greece urban road network
->>> chania.S                                      % Get number of stages
+>>> chania = SFMSynthesis('ChaniaUrbanRoadModel'); % Load Chania, Greece urban road network
+>>> chania.S                                       % Get number of stages
 > ans = 
 >     42
->>> chania.nStagesJunction(4)                     % Get number of stages associated with junction 4
+>>> chania.nStagesJunction(4)                      % Get number of stages associated with junction 4
 > ans =
 >     3
->>> chania.junctions{4}                           % Get the indices of the stages associated with junction 4
+>>> chania.junctions{4}                            % Get the indices of the stages associated with junction 4
 > ans =
 >     8     9    10
->>> chania.links(13,:)                            % Get origin and destination junction of link 13
+>>> chania.links(13,:)                             % Get origin and destination junction of link 13
 > ans =
->     5     4                                      % Link 13 goes from junction 5 towards junction 4
+>     5     4                                       % Link 13 goes from junction 5 towards junction 4
   
   
 ## Contributing to SAFFRON
