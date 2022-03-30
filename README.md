@@ -61,20 +61,61 @@ where <tt>directory</tt> is the enclosing folder of the <i>txt</i> files and <tt
 
 The **fields** of store-and-forward model object *struct* are 
 
-| Field      | Description |
-| ----------- | ----------- |
-| a      | b       |
-| b   | a        |
+| Field      | Description | Notation 
+| ----------- | ----------- |-----------|
+| <tt>J</tt> | Number of junctions | ![$J$](https://render.githubusercontent.com/render/math?math=\color{gray}J)|
+| <tt>Z</tt> | Number of junctions | ![$L$](https://render.githubusercontent.com/render/math?math=\color{gray}Z)|
+| <tt>nStages</tt> | Number of stages | ![$L$](https://render.githubusercontent.com/render/math?math=\color{gray}S)|
+| <tt>C</tt> | Control cycle (s) | ![$C$](https://render.githubusercontent.com/render/math?math=\color{gray}C)|
+| <tt>c</tt> | Upstream gating parameter | ![$c_{ug}$](https://render.githubusercontent.com/render/math?math=\color{gray}c_{ug})|
+| <tt>Tsim</tt> | Simulation cycle (s) | ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T)|
+| <tt>lostTime</tt> | Column vector of lost times (s) in each junction  | ![$\mathrm{col}(L_1,\ldots,L_J)$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(L_1,\ldots,L_J))|
+| <tt>nStagesJunction</tt> | Column vector of number of stages of each junction | <img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(&#124\mathcal{F}_1&#124,\ldots,&#124\mathcal{F}_S&#124))" alt="\mathrm{col}(&#124\mathcal{F}_1&#124,\ldots,&#124\mathcal{F}_S&#124)">|
+| <tt>capacity</tt> | Column vector of capacity of each link (veh) | ![$\mathrm{col}(x_{1,\text{max}},\ldots,x_{Z,\text{max}})$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(x_{1,\text{max}},\ldots,x_{Z,\text{max}}))|
+| <tt>saturation</tt> | Column vector of saturation flow of each link (veh/s) | ![$\mathrm{col}(S_1,\ldots,S_Z)$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(S_1,\ldots,S_Z))|
+| <tt>lanes</tt> | Column vector of number of lanes in each link | - |
+| <tt>x0</tt> | Initial number of vehicles of each link (veh) | ![$\mathbf{x}(0)$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{x}(0))|
+| <tt>d</tt> | Column vector of demand on each link (veh/s) | ![$\mathrm{col}(d_1,\ldots,d_Z)$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(d_1,\ldots,d_Z))|
+| <tt>gmin</tt> | Column vector of minimum green time of each stage (s) | ![$\mathrm{col}(g_{1,min},\ldots,g_{S,min})$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(g_{1,min},\ldots,g_{S,min}))|
+| <tt>gN</tt> |  Column vector of historic green time of each stage (s) | ![$\mathbf{g_N}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{g_N})|
+| <tt>T</tt> | Turning rates matrix | ![$\mathbf{T}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{T})|
+| <tt>t0</tt> | Exit rates vector | ![$\mathbf{t_0}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{t_0})|
+| <tt>S</tt> | Stage matrix | ![$\mathbf{S}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{S})|
+| <tt>junctions</tt> | Cell array indexed by junction number that contains the number of the stages associated with that junction (see example below) | - |
 
+               'junctions',{junctions},...               
+               'links',links,...
+
+               'inLinks',inLinks,...
+               'notInLinks',notInLinks,...
+               
+               
+               'A',A,...
+               'Bu',Bu,...
+               'BG',BG,...
+               'Bg',Bg,...
+               'Bu_sim',Bu_sim,...
+               'BG_sim',BG_sim,...
+               'Bg_sim',Bg_sim,...
+               'C_z',C_z,...
+               'E_DTUC_psi',E_DTUC_psi,...
+               'E_DTUC_phi',E_DTUC_phi,...
+               'E_D2TUC_psi',E_D2TUC_psi,...
+               'E_D2TUC_phi',E_D2TUC_phi);
 
 
 >Example: *Load the Chania urban road network provided in SAFFRON*
 >```
->>> chania = SFMSynthesis('ChaniaUrbanRoadModel')
->>> chania.S
+>>> chania = SFMSynthesis('ChaniaUrbanRoadModel') % Load Chania, Greece urban road network
+>>> chania.S                                      % Get number of stages
 > ans = 
 >     42
-
+>>> chania.nStagesJunction(4)                     % Get number of stages associated with junction 4
+> ans =
+>     3
+>>> chania.junctions{4}                           % Get the indices of the stages associated with junction 4
+> ans =
+>     8     9    10
   
   
 ## Contributing to SAFFRON
