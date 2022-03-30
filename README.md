@@ -61,8 +61,8 @@ where <tt>directory</tt> is the enclosing folder of the <i>txt</i> files and <tt
 
 The **fields** of store-and-forward model object *struct* are 
 
-| Field      | Description | Notation 
-| ----------- | ----------- |-----------|
+| Field  | Description | Notation |
+| -- | -- |------------|
 | <tt>J</tt> | Number of junctions | ![$J$](https://render.githubusercontent.com/render/math?math=\color{gray}J)|
 | <tt>Z</tt> | Number of junctions | ![$L$](https://render.githubusercontent.com/render/math?math=\color{gray}Z)|
 | <tt>nStages</tt> | Number of stages | ![$L$](https://render.githubusercontent.com/render/math?math=\color{gray}S)|
@@ -70,7 +70,7 @@ The **fields** of store-and-forward model object *struct* are
 | <tt>c</tt> | Upstream gating parameter | ![$c_{ug}$](https://render.githubusercontent.com/render/math?math=\color{gray}c_{ug})|
 | <tt>Tsim</tt> | Simulation cycle (s) | ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T)|
 | <tt>lostTime</tt> | Column vector of lost times (s) in each junction  | ![$\mathrm{col}(L_1,\ldots,L_J)$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(L_1,\ldots,L_J))|
-| <tt>nStagesJunction</tt> | Column vector of number of stages of each junction | <img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(&#124\mathcal{F}_1&#124,\ldots,&#124\mathcal{F}_S&#124))" alt="\mathrm{col}(&#124\mathcal{F}_1&#124,\ldots,&#124\mathcal{F}_S&#124)">|
+| <tt>nStagesJunction</tt> | Column vector of number of stages of each junction | <img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(&#124\mathcal{F}_1&#124,\ldots,&#124\mathcal{F}_S&#124))" alt="$\mathrm{col}(&#124\mathcal{F}_1&#124,\ldots,&#124\mathcal{F}_S&#124)$">|
 | <tt>capacity</tt> | Column vector of capacity of each link (veh) | ![$\mathrm{col}(x_{1,\text{max}},\ldots,x_{Z,\text{max}})$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(x_{1,\text{max}},\ldots,x_{Z,\text{max}}))|
 | <tt>saturation</tt> | Column vector of saturation flow of each link (veh/s) | ![$\mathrm{col}(S_1,\ldots,S_Z)$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{col}(S_1,\ldots,S_Z))|
 | <tt>lanes</tt> | Column vector of number of lanes in each link | - |
@@ -81,32 +81,26 @@ The **fields** of store-and-forward model object *struct* are
 | <tt>T</tt> | Turning rates matrix | ![$\mathbf{T}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{T})|
 | <tt>t0</tt> | Exit rates vector | ![$\mathbf{t_0}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{t_0})|
 | <tt>S</tt> | Stage matrix | ![$\mathbf{S}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{S})|
-| <tt>junctions</tt> | Cell array indexed by junction number that contains the number of the stages associated with that junction (see example below) | - |
-
-               'junctions',{junctions},...               
-               'links',links,...
-
-               'inLinks',inLinks,...
-               'notInLinks',notInLinks,...
-               
-               
-               'A',A,...
-               'Bu',Bu,...
-               'BG',BG,...
-               'Bg',Bg,...
-               'Bu_sim',Bu_sim,...
-               'BG_sim',BG_sim,...
-               'Bg_sim',Bg_sim,...
-               'C_z',C_z,...
-               'E_DTUC_psi',E_DTUC_psi,...
-               'E_DTUC_phi',E_DTUC_phi,...
-               'E_D2TUC_psi',E_D2TUC_psi,...
-               'E_D2TUC_phi',E_D2TUC_phi);
-
+| <tt>junctions</tt> | Cell array indexed by junction number that contains the number of the stages associated with that junction (see example below) | -|
+| <tt>links</tt> | <img src="https://render.githubusercontent.com/render/math?math=\color{gray}Z\times 2" alt="$Z\times 2$"> matrix whose rows are indexed by link number and the corresponding columns are the origin and destination junctions respectively, *i.e.*, it is the ordered list of edges of the network graph (see example below) | - |
+| <tt>inLinks</tt> | Column vector of link indices that originate from outside the network | - |
+| <tt>notInLinks</tt> | Column vector of link indices that do not originate from outside the network | - |
+| <tt>A</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{A}) of the store-and-forward model of the network | ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{A})|
+| <tt>Bu</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (4) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) | ![$\mathbf{B_u}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_u})|
+| <tt>BG</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (7) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) | ![$\mathbf{B_G}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_G})|
+| <tt>Bg</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (8) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) | ![$\mathbf{B_g}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_g})|
+| <tt>Bu_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (4) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) discretized with simulation cycle [$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
+| <tt>BG_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (7) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) discretized with simulation cycle [$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
+| <tt>Bg_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (8) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) discretized with simulation cycle [$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
+| <tt>C_z</tt> | State-space matrix ![$\mathbf{C}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{C}) of the store-and-forward model of the network | ![$\mathbf{C}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{C})|
+| <tt>E_DTUC_psi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy DTUC with decentralized configuration ![$\mathbf{\Psi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Psi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Psi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Psi}})|
+| <tt>E_DTUC_phi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy DTUC with decentralized configuration ![$\mathbf{\Phi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Phi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Phi}})|
+| <tt>E_D2TUC_psi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy D2TUC with decentralized configuration ![$\mathbf{\Psi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Psi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Psi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Psi}})|
+| <tt>E_D2TUC_phi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy D2TUC with decentralized configuration ![$\mathbf{\Phi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Phi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Phi}})|
 
 >Example: *Load the Chania urban road network provided in SAFFRON*
 >```
->>> chania = SFMSynthesis('ChaniaUrbanRoadModel') % Load Chania, Greece urban road network
+>>> chania = SFMSynthesis('ChaniaUrbanRoadModel');% Load Chania, Greece urban road network
 >>> chania.S                                      % Get number of stages
 > ans = 
 >     42
@@ -116,6 +110,9 @@ The **fields** of store-and-forward model object *struct* are
 >>> chania.junctions{4}                           % Get the indices of the stages associated with junction 4
 > ans =
 >     8     9    10
+>>> chania.links(13,:)                            % Get origin and destination junction of link 13
+> ans =
+>     5     4                                      % Link 13 goes from junction 5 towards junction 4
   
   
 ## Contributing to SAFFRON
@@ -131,5 +128,5 @@ Diakaki, C., 1999. Integrated control of traffic flow in corridor networks. Ph. 
   
 Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward based strategies for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 132, p.103412.
   
-Pedroso, L., Batista, P., Aboudolas, K. and Kosmatopoulos, E. [not published yet]
+Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]
 </p>
