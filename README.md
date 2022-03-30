@@ -26,6 +26,7 @@
 ## Description
 <p align="justify">
 [link to article- description of store and forward there]
+[if use cite ]
 [Add brief description and motivation]
 [say documentation below]
 [probably add an index with links to the sections below]
@@ -179,11 +180,15 @@ which outputs a boolean.
 
 #### Performance metrics
 
+<p align="justify">
+The performance metrics total time spent (TTS) and relative queue balance (RQB) introcuced in <a href="#references">(Aboudolas, Papageorgiou, and Kosmatopoulos, 2009)</a> can be computed seamlessly with SAFFRON. Let <tt>xNL</tt> be a <img src="https://render.githubusercontent.com/render/math?math=\color{gray}Z\times N_{sim}" alt="$Z\times N_{sim}$"> array, where <img src="https://render.githubusercontent.com/render/math?math=\color{gray}N_{sim}" alt="$N_{sim}$"> is the number of cycles that were simulated with the nonlinear model (See <a href="simulation-script">Simulation script</a> for a template to simulate the nonlinear model and <a href="example">Example</a> for an example). The <img src="https://render.githubusercontent.com/render/math?math=\color{gray}k" alt="$k$">-th row of <tt>xNL</tt>, <i>i.e.</i> <tt>xNL(:,k)</tt>, is the column vector of the link occupancy at time <img src="https://render.githubusercontent.com/render/math?math=\color{gray}t = kT" alt="$t = kT$">.
+</p>
 
 #### Quadratic continuous knapsack solver
 
 
 ### Simulation script
+
 
 ### Chania urban road network
 
