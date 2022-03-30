@@ -226,11 +226,11 @@ function g = LQcontrolAction(x,L_LQ,model,gN)
     g = zeros(size(gpre));
     for j = 1:model.J   
         stgsj = (sum(model.nStagesJunction(1:j-1))+1:sum(model.nStagesJunction(1:j-1))+model.nStagesJunction(j));
-        a = (gpre(stgsj)-model.gmin(j));
+        a = (gpre(stgsj)-model.gmin(stgsj));
         d = ones(model.nStagesJunction(j),1);
-        c = model.C-model.lostTime(j)-model.nStagesJunction(j)*model.gmin(j);
+        c = model.C-model.lostTime(j)-sum(model.gmin(stgsj));
         b = c*ones(model.nStagesJunction(j),1);
-        g(stgsj) = knapsack(a,b,c,d)+model.gmin(j);     
+        g(stgsj) = knapsack(a,b,c,d)+model.gmin(stgsj);     
     end
 end
 
@@ -250,11 +250,11 @@ function g = QPCcontrolAction(x,L_QPC,model,S,gNQPC)
     g = zeros(size(gpre));
     for j = 1:model.J   
         stgsj = (sum(model.nStagesJunction(1:j-1))+1:sum(model.nStagesJunction(1:j-1))+model.nStagesJunction(j));
-        a = (gpre(stgsj)-model.gmin(j));
+        a = (gpre(stgsj)-model.gmin(stgsj));
         d = ones(model.nStagesJunction(j),1);
-        c = model.C-model.lostTime(j)-model.nStagesJunction(j)*model.gmin(j);
+        c = model.C-model.lostTime(j)-sum(model.gmin(stgsj));
         b = c*ones(model.nStagesJunction(j),1);
-        g(stgsj) = knapsack(a,b,c,d)+model.gmin(j);     
+        g(stgsj) = knapsack(a,b,c,d)+model.gmin(stgsj);     
     end
 end
 
