@@ -9,7 +9,19 @@
 - Full model of the urban traffic network of the city center of **Chania, Greece**
 - Implementation of **state-of-the-art** traffic responsive signal control strategies
 
+***
 
+## Index
+
+- [Description](#description)
+- [Authors](#authors)
+- [Contact](#contact)
+- [Documentation](#documentation)
+- [Contributing to SAFFRON](#contributing-to-saffron)
+- [Lincense](#license)
+- [References](references)
+
+***
 
 ## Description
 <p align="justify">
@@ -18,6 +30,8 @@
 [say documentation below]
 [probably add an index with links to the sections below]
 </p>
+
+***
 
 ## Authors 
 Leonardo Pedroso<sup>1</sup> (<a href="https://github.com/leonardopedroso">GitHub</a>, <a href="https://scholar.google.com/citations?user=W7_Gq-0AAAAJ">Google Scholar</a>, <a href="https://orcid.org/0000-0002-1508-496X">ORCID</a>)<br>
@@ -28,11 +42,25 @@ Elias Kosmatopoulos<sup>3</sup> (<a href="https://scholar.google.com/citations?u
   <sup>2</sup>Dynamic Systems and Simulation Laboratory, Technical University of Crete, GR-73100 Chania, Greece<br>
   <sup>3</sup>Department of Electrical and Computer Engineering, Democritus University of Thrace, Xanthi, Greece<br>*</sub>
 
+***
+
 ## Contact
 SAFFRON toolbox is currently maintained by Leonardo Pedroso (<a href="mailto:leonardo.pedroso@tecnico.ulisboa.pt">leonardo.pedroso@tecnico.ulisboa.pt</a>).
 
+***
+
 ## Documentation
-### Synthesis
+The documentation is divided into the following categories:
+- [Model synthesis](#model-synthesis)
+- [Utilities](#utilities)
+  * [Network properties](#network-properties)
+  * [Performance metrics](#performance-metrics)
+  * [Quadratic continuous knapsack solver](#quadratic-continuous-knapsack-solver)
+- [Simulation script](#simulation-script)
+- [Chania urban road network](#chania-urban-road-network)
+- [Example](#example)
+
+### Model synthesis
 <p align="justify">
 A store-and-forward urban road network can be synthesized seamlessly with SAFFRON by filling a custom spreadsheet. A template is provided in a <a href=https://github.com/decenter2021/SAFFRON/tree/master/ModelTemplate>subfolder</a> of the repository. The following data is input in the spreadsheet:
 </p>
@@ -116,16 +144,63 @@ The **fields** of store-and-forward model object *struct* are
   
 ### Utilities
 
+#### Network properties
+<p align="justify">
+  It is possible to check if the traffic network is <b>open</b> and if it has a <b>minimum complete stage strategy</b>. These properties are defined with rigour in <a href="#references">(Pedroso and Batista, 2021)</a>. They are closely related with the controllability of the store-and-forward model.
+</p>
+
+> A traffic network is said to be **open** if there is a directed walk starting at every link which a vehicle may follow to exit the network with non-zero probability. [(Pedroso and Batista, 2021)](#references)<br>
+
+> A traffic network is said to be **feasible** if it is **finite** and **open**. [(Pedroso and Batista, 2021)](#references)
+
+To check if the store-and-forward model <tt>model</tt> is open, thus fesible, the following command is used
+```
+>> flag = isOpen(model);
+```
+which outputs a boolean.
+
+To check if the store-and-forward model <tt>model</tt> has a minimum complete stage strategy, the following command is used
+```
+>> flag = isMinimumComplete(model);
+```
+which outputs a boolean.
+
+>Example: *Check if the Chania urban road network provided in SAFFRON is open and if it has a minimum complete stage strategy*
+>```
+>>> chania = SFMSynthesis('ChaniaUrbanRoadModel'); % Load Chania, Greece urban road network
+>>> flag = isOpen(chania)                          % Check if it is open
+> flag  = 
+>   logical
+>     1
+>>> flag = isMinimumComplete(chania)               % Get it has a minimum complete stage strategy
+> flag  = 
+>   logical
+>     1
+
+#### Performance metrics
+
+
+#### Quadratic continuous knapsack solver
+
+
 ### Simulation script
 
 ### Chania urban road network
 
 ### Example
+
+[probably use a different section name]
+
+***
   
 ## Contributing to SAFFRON
 
+***
+
 ## License
 [MIT License](https://github.com/decenter2021/SAFFRON/LICENSE)
+
+***
 
 ## References 
 <p align="justify">
