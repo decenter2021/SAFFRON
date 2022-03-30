@@ -12,12 +12,12 @@
 
 
 ## Description
-<div style="text-align: justify">
+<p align="justify">
 [link to article- description of store and forward there]
 [Add brief description and motivation]
 [say documentation below]
 [probably add an index with links to the sections below]
-</div>
+</p>
 
 ## Authors 
 Leonardo Pedroso<sup>1</sup> (<a href="https://github.com/leonardopedroso">GitHub</a>, <a href="https://scholar.google.com/citations?user=W7_Gq-0AAAAJ">Google Scholar</a>, <a href="https://orcid.org/0000-0002-1508-496X">ORCID</a>)<br>
@@ -33,8 +33,49 @@ SAFFRON toolbox is currently maintained by Leonardo Pedroso (<a href="mailto:leo
 
 ## Documentation
 ### Synthesis
-A store-and-forward urban road network can be synthesized in SAFFRON by filling a custom spreadsheet
+<p align="justify">
+A store-and-forward urban road network can be synthesized seamlessly with SAFFRON by filling a custom spreadsheet. A template is provided in a <a href=https://github.com/decenter2021/SAFFRON/tree/master/ModelTemplate>subfolder</a> of the repository. The following data is input in the spreadsheet:
+</p>
 
+- the number of junctions ![$J$](https://render.githubusercontent.com/render/math?math=\color{gray}J), links ![$Z$](https://render.githubusercontent.com/render/math?math=\color{gray}Z), and stages ![$S$](https://render.githubusercontent.com/render/math?math=\color{gray}S), control cycle ![$C$](https://render.githubusercontent.com/render/math?math=\color{gray}C), simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T), and the upstream gating parameter ![$c_ug$](https://render.githubusercontent.com/render/math?math=\color{gray}c_{ug})
+- the lost time and number of stages in each junction 
+- the capacity, saturation flow, number of lanes, initial number of vehicles, and demand flow for each link
+- the minimum green time and historic green time of each stage
+- the stage matrix ![$\mathbf{S}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{S}), *i.e.*, a table that indicates which links have right of way (r.o.w.) for each stage
+- the turning rates matrix ![$\mathbf{T}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{T}), *i.e.*, a table that indicates the probability of turning into the links of the network on the exit of a certain link, and the exit rate of all links ![$\mathbf{t_0}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{t_0})
+
+<p align="justify">
+Each table of the spreadsheet has to copied and pasted to <i>txt</i> whose names are indicated next to each table in the spreadsheet. These <i>txt</i> files have to be enclosed in a folder with the name of the urban road model. Template <i>txt</i> files and an example of this procedure are provided in a <a href=https://github.com/decenter2021/SAFFRON/tree/master/ModelTemplate>subfolder</a> of the repository.
+</p>
+
+The model is loaded into MATLAB making use of the following command 
+```
+>> model = SFMSynthesis("directory")
+```
+<p align="justify">
+where <tt>directory</tt> is the enclosing folder of the <i>txt</i> files and <tt>model</tt> is a <i>MATLAB struct</i> object that characterizes the urban road network. The command above also saves the model object, as well as the raw input tables, in the file <i>data.txt</i> in the model folder. Thus afterwards the models can also be loaded using</p>
+
+```
+>> model = load("directory/data.mat")
+```
+
+The **fields** of store-and-forward model object *struct* are 
+
+| Field      | Description |
+| ----------- | ----------- |
+| a      | b       |
+| b   | a        |
+
+
+
+>Example: *Load the Chania urban road network provided in SAFFRON*
+>```
+>>> chania = SFMSynthesis('ChaniaUrbanRoadModel')
+>>> chania.S
+> ans = 
+>     42
+
+  
   
 ## Contributing to SAFFRON
 
