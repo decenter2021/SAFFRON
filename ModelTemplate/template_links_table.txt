@@ -1,0 +1,8 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Template of file 'links_table.txt'.
+Variable notation according to Pedroso et al. (2021) doi:10.1016/j.trc.2021.103412
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<Capacity of link 1>	<Saturation flow (veh/h) of link 1>	<Number of lanes of link 1>	<Initial number of vehicles of link 1>	<Demand flow (veh/h) of link 1>
+<Capacity of link 2>	<Saturation flow (veh/h) of link 2>	<Number of lanes of link 2>	<Initial number of vehicles of link 2>	<Demand flow (veh/h) of link 2>
+...			...					...				...					...
+<Capacity of link Z>	<Saturation flow (veh/h) of link Z>	<Number of lanes of link Z>	<Initial number of vehicles of link Z>	<Demand flow (veh/h) of link Z>
