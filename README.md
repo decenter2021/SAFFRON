@@ -180,12 +180,51 @@ which outputs a boolean.
 
 #### Performance metrics
 
+
+The performance metrics total time spent (TTS) <br>
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{TTS} = T\sum_{k}\sum_{z=1}^Zx_z(k)" alt="$\mathrm{TTS} = C\sum_{k}\sum_{z=1}^Zx_z(k)$">
+</p><br>
+and relative queue balance (RQB) <br>
+<p align="center">
+<img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{RQB} = \sum_{k}\sum_{z=1}^Z\frac{x_z^2(k)}{x_{z,max}}" alt="$\mathrm{RQB} = \sum_{k}\sum_{z=1}^Z\frac{x_z^2(k)}{x_{z,max}}$">
+</p><br>
 <p align="justify">
-The performance metrics total time spent (TTS) and relative queue balance (RQB) introcuced in <a href="#references">(Aboudolas, Papageorgiou, and Kosmatopoulos, 2009)</a> can be computed seamlessly with SAFFRON. Let <tt>xNL</tt> be a <img src="https://render.githubusercontent.com/render/math?math=\color{gray}Z\times N_{sim}" alt="$Z\times N_{sim}$"> array, where <img src="https://render.githubusercontent.com/render/math?math=\color{gray}N_{sim}" alt="$N_{sim}$"> is the number of cycles that were simulated with the nonlinear model (See <a href="simulation-script">Simulation script</a> for a template to simulate the nonlinear model and <a href="example">Example</a> for an example). The <img src="https://render.githubusercontent.com/render/math?math=\color{gray}k" alt="$k$">-th row of <tt>xNL</tt>, <i>i.e.</i> <tt>xNL(:,k)</tt>, is the column vector of the link occupancy at time <img src="https://render.githubusercontent.com/render/math?math=\color{gray}t = kT" alt="$t = kT$">.
+introcuced in <a href="#references">(Aboudolas, Papageorgiou, and Kosmatopoulos, 2009)</a> can be computed seamlessly with SAFFRON. 
+Let <tt>xNL</tt> be a <img src="https://render.githubusercontent.com/render/math?math=\color{gray}Z\times N_{sim}" alt="$Z\times N_{sim}$"> array, where <img src="https://render.githubusercontent.com/render/math?math=\color{gray}N_{sim}" alt="$N_{sim}$"> is the number of cycles that were simulated of a model <tt>model</tt> with the nonlinear dynamiccs (See <a href="simulation-script">Simulation script</a> for a template to simulate the nonlinear dynamics and <a href="example">Example</a> for an example). The <img src="https://render.githubusercontent.com/render/math?math=\color{gray}k" alt="$k$">-th row of <tt>xNL</tt>, <i>i.e.</i> <tt>xNL(:,k)</tt>, is the column vector of the link occupancy at time <img src="https://render.githubusercontent.com/render/math?math=\color{gray}t = kT" alt="$t = kT$">. The command
 </p>
 
-#### Quadratic continuous knapsack solver
+```
+>> [TTS,RQB] = SFMMetrics(model,xNL);
+```
 
+outputs the <tt>TTS</tt> (in veh h) and the <tt>RQB</tt> (in veh).
+
+
+#### Quadratic continuous knapsack solver
+<p align="justify">
+  The <b>quadratic continuous knapsack problem</b> often arises in a post-processing stage of a continous traffic signal control policy to <b>allocate the green times among the stages</b>. The command
+</p>
+
+```
+>> x = knapsack(a,b,c,d);
+```
+
+<p align="justify">
+where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is a scalar, outputs the solution. For more details see <a href="#references">(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)</a>. The algorithm that is implemented is poposed in <a href="#references">(Helgason, Kennington, and Lall, 1980)</a>, it is detailled in the context of traffic signal control in <a href="#references">(Diakaki, 1999)</a>.
+  </p>
+
+>Example: *Quadratic continuous knapsack problem*
+>```
+>>> a = [0;-1;0];
+>>> b = [4;2;1];
+>>> c = 5;
+>>> d = [1;1;1];
+>>> x = knapsack(a,b,c,d)
+>x =
+>   2.5000
+>   1.5000
+>   1.0000 
 
 ### Simulation script
 
@@ -209,11 +248,14 @@ The performance metrics total time spent (TTS) and relative queue balance (RQB) 
 
 ## References 
 <p align="justify">
-<a href="https://doi.org/10.1016/j.trc.2008.10.002">Aboudolas, K., Papageorgiou, M. and Kosmatopoulos, E., 2009. Store-and-forward based methods for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 17(2), pp.163-174.</a>
+<a href="https://doi.org/10.1016/j.trc.2008.10.002">Aboudolas, K., Papageorgiou, M. and Kosmatopoulos, E., 2009. Store-and-forward based methods for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 17(2), pp.163-174. doi:10.1016/j.trc.2008.10.002.</a>
   
 <a href="https://www.researchgate.net/profile/Christina-Diakaki/publication/270751666_Integrated_Control_of_Traffic_Flow_in_Corridor_Networks/links/569902fc08ae748dfaff351f/Integrated-Control-of-Traffic-Flow-in-Corridor-Networks.pdf">Diakaki, C., 1999. Integrated control of traffic flow in corridor networks. Ph. D. Thesis.</a>
+ 
+<a href="https://doi.org/10.1007/BF01588328">Helgason, R., Kennington, J. and Lall, H., 1980. A polynomially bounded algorithm for a singly constrained quadratic program. Mathematical Programming, 18(1), pp.338-343. doi:10.1007/BF01588328.</a>
+
   
-<a href="https://doi.org/10.1016/j.trc.2021.103412">Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward based strategies for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 132, p.103412.</a>
+<a href="https://doi.org/10.1016/j.trc.2021.103412">Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward based strategies for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 132, p.103412. doi:10.1016/j.trc.2021.103412.</a>
   
 Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]
 </p>
