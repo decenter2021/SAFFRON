@@ -1,7 +1,7 @@
 %% knapsack - Description
 % This function solves the knapsack problem 
 % Implementation of algorithm in [1]
-% Input:    - a,b,c,d as defined in [1]
+% Input:    - a,b,c,d as defined in [2]
 % Output:   - x: knapsack solution
 
 function x = knapsack(a,b,c,d)
@@ -54,7 +54,13 @@ end
 end
 
 %% References
-
 % [1] Helgason, R., Kennington, J., Lall, H., 1980. A polynomially bounded 
 % algorithm for a singly constrained quadratic program. Math. Program. 
 % 18 (1), 338-343.
+
+% [2] Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward 
+% based strategies for the signal control problem in large-scale congested 
+% urban road networks. Transportation Research Part C: Emerging 
+% Technologies, 132, p.103412. doi:10.1016/j.trc.2021.103412.
+
+
