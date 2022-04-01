@@ -1,3 +1,12 @@
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
 %% SFMSynthesis - Description
 % This function synthesizes the model of a traffic network from the raw
 % data provide in text files. 
@@ -6,6 +15,7 @@
 %               - 'junctions_table.txt': caracteristics of each junction
 %               - 'links_table.txt': characteristics of each link
 %               - 'stage_matrix.txt': stage matrix
+%               - 'stage_table.txt': characteristics of each junction
 %               - 'turning_rates_table.txt': turning rates matrix
 % (For templates of the text files check "template_*.txt")
 % Output:   - model: struct of variables that characterize the network

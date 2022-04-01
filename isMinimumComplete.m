@@ -1,6 +1,19 @@
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
+%% isMinimumComplete - Description 
+% This function checks whether a traffic network has a minimum complete
+% stage strategy according to [1]
+% Input:    - model: struct of variables that characterize the network
+% Output:   - flag: boolean that indicates if the network has a minimum 
+% complete stage strategy
 function [flag] = isMinimumComplete(model)
-%ISMINIMUMCOMPLETE Summary of this function goes here
-%   Detailed explanation goes here
 
 % From Definition 2.3 in [1]
 % Condition 1

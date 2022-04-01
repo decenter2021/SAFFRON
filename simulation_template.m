@@ -1,8 +1,17 @@
-%% Description - Template Traffic Network Control
-% This script is a template for the implementation of a tarffic resposive
-% control solution using the store-and-forward model using SAFFRON toolbox
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
 
-% An example of the implemenattion of the simulations in [2] is available
+%% Description - Template Traffic Network Simulatio
+% This script is a template for the implementation of a trraffic resposive
+% control solution using the store-and-forward model using SAFFRON toolbox
+% An example of the implementation of the simulations in [2] is available
 % in Examples/PedrosoBatista2021
 
 %% Initilalize workspace
