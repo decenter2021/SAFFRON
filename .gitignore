@@ -31,4 +31,10 @@ codegen/
 octave-workspace
 
 
+# MacOS hidden files
 .DS_Store
+
+# MS Excel hidden files
+*\~$*.xlsx
+
+

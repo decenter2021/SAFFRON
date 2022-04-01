@@ -1,13 +1,23 @@
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
+%% isOpen - Description 
+% This function checks whether a traffic network is open according to [1]
+% Input:    - model: struct of variables that characterize the network
+% Output:   - flag: boolean that indicates if the network is open according
 function [flag] = isOpen(model)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
-
 % From Definition 2.3 in [1]
 % Links from which it is possible to exit the network
 visitedLinks = false(model.Z,1);
 
 % 1. all links with an exit rate allow to leave the network
-visitedlinks(model.t0 > eps(0)) = true;
+visitedLinks(model.t0 > eps(0)) = true;
 
 % 2. There are junctions with links (dashed) towards outside the network
 % The links z with ability to turn to those links do not sum up to 1 in the
@@ -34,7 +44,6 @@ while true
     % Check if iterative procedure finished
     if sum(~visitedLinks)>0
         if wasUpdated
-            wasUpdated = false;
             continue;
         else
             flag = false;

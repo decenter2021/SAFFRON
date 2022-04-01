@@ -1,14 +1,23 @@
-%% Description - Template Traffic Network Control
-% This script is a template for the implementation of a tarffic resposive
-% control solution using the store-and-forward model using SAFFRON toolbox
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
 
-% An example of the implemenattion of the simulations in [2] is available
+%% Description - Template Traffic Network Simulatio
+% This script is a template for the implementation of a trraffic resposive
+% control solution using the store-and-forward model using SAFFRON toolbox
+% An example of the implementation of the simulations in [2] is available
 % in Examples/PedrosoBatista2021
 
 %% Initilalize workspace
 clear;
 
-%% Import LTI model of urban raod network
+%% Import urban road network model
 % Import Chania network
 model = SFMSynthesis("ChaniaUrbanRoadModel");
 
@@ -17,7 +26,6 @@ model = SFMSynthesis("ChaniaUrbanRoadModel");
 % scenario. These can be used as a benchmark. To test different initial
 % conditions and demand scenarios simply make modifications to model.x0 and
 % model.d
-
 % For example:
 rng(1); % Seed for consistency
 % Set initial conditions

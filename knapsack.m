@@ -1,9 +1,17 @@
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
 %% knapsack - Description
 % This function solves the knapsack problem 
 % Implementation of algorithm in [1]
-% Input:    - a,b,c,d as defined in [3]
+% Input:    - a,b,c,d as defined in [2]
 % Output:   - x: knapsack solution
-
 function x = knapsack(a,b,c,d)
 % Variables
 aux = a-d.*b;
@@ -54,12 +62,13 @@ end
 end
 
 %% References
-
 % [1] Helgason, R., Kennington, J., Lall, H., 1980. A polynomially bounded 
 % algorithm for a singly constrained quadratic program. Math. Program. 
-% 18 (1), 338?343.
+% 18 (1), 338-343.
 
 % [2] Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward 
 % based strategies for the signal control problem in large-scale congested 
 % urban road networks. Transportation Research Part C: Emerging 
 % Technologies, 132, p.103412. doi:10.1016/j.trc.2021.103412.
+
+

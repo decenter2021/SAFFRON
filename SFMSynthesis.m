@@ -1,3 +1,12 @@
+% -------------------------------------------------------------------------
+% SAFFRON toolbox: https://github.com/decenter2021/SAFFRON
+% AUTHORS: Leonardo Pedroso, Pedro Batista, Markos Papageorgiou, and Elias
+% Kosmatopoulos 
+% LICENSE: MIT License
+% If you use SAFFRON, reference the publication below
+%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
+%   [not published yet]
+% -------------------------------------------------------------------------
 %% SFMSynthesis - Description
 % This function synthesizes the model of a traffic network from the raw
 % data provide in text files. 
@@ -6,6 +15,7 @@
 %               - 'junctions_table.txt': caracteristics of each junction
 %               - 'links_table.txt': characteristics of each link
 %               - 'stage_matrix.txt': stage matrix
+%               - 'stage_table.txt': characteristics of each junction
 %               - 'turning_rates_table.txt': turning rates matrix
 % (For templates of the text files check "template_*.txt")
 % Output:   - model: struct of variables that characterize the network
@@ -194,7 +204,7 @@ model = struct('S',S,...
                'E_D2TUC_phi',E_D2TUC_phi);
            
 %% Save synthesized model
-save(sprintf("%s/%s.mat",folder,folder),'junctionTable','linksTable','S','turningRatesTable','t0','T',...
+save(sprintf("%s/data.mat",folder),'junctionTable','linksTable','S','turningRatesTable','t0','T',...
     'J','Z','nStages','C','c','Tsim','lostTime','nStagesJunction','gmin','gN','capacity','saturation',...
     'lanes','x0','d','junctions','links','inLinks','notInLinks','A','Bu','BG','Bg','Bu_sim',...
     'BG_sim','Bg_sim','C_z','E_DTUC_psi','E_DTUC_phi','E_D2TUC_psi','E_D2TUC_phi','dataGeneral','stagesTable');
