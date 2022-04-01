@@ -16,27 +16,29 @@
 - [Authors](#-authors)
 - [Contact](#-contact)
 - [Documentation](#-documentation)
-- [Contributing to SAFFRON](#contributing-to-saffron)
-- [Lincense](#license)
-- [References](references)
+- [Contributing to SAFFRON](#-contributing-to-saffron)
+- [Lincense](#-license)
+- [References](#-references)
 
 ***
 
 ## 💡 Description
 <p align="justify">
+  The SAFFRON toolbox is introduced to <b>synthesize, analyze, and simulate store-and-forward</b> based strategies for the signal control problem in congested urban road networks in <b>MATLAB</b>. SAFFRON is tecnhically described in 
+</p>
 
-The SAFFRON toolbox is introduced to **synthesize, analyze, and simulate store-and-forward** based strategies for the signal control problem in congested urban road networks in **MATLAB**. SAFFRON is tecnhically described in 
-  
 <a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]</a>
   
 If you use SAFFRON, reference the publication above.
 
-[link to article- description of store and forward there]
-[if use cite ]
+SAFFRON allows to:
+- Seamlessly simulate store-and-forward based signal control strategies
+- Apply novel solutions to a meaningful model that is publicly available and, hence, can be reproduced
+- Compare novel solutions with other control strategies with little effort
 
-  [A dd brief description and motivation]
-  [say documentation below]
-</p>
+Low-level thorough [documentation](#-documentation) is provided in the repository page, as well as in the source files.
+
+The community is encouraged to [contribute](#-contributing-to-saffron) to SAFFRON with suggestions, additions, and the implementation of signal control strategies.
 
 ***
 
@@ -126,17 +128,17 @@ The **fields** of store-and-forward model object *struct* are
 | <tt>inLinks</tt> | Column vector of link indices that originate from outside the network | - |
 | <tt>notInLinks</tt> | Column vector of link indices that do not originate from outside the network | - |
 | <tt>A</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{A}) of the store-and-forward model of the network | ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{A})|
-| <tt>Bu</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (4) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) | ![$\mathbf{B_u}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_u})|
-| <tt>BG</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (7) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) | ![$\mathbf{B_G}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_G})|
-| <tt>Bg</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (8) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) | ![$\mathbf{B_g}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_g})|
-| <tt>Bu_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (4) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) discretized with simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
-| <tt>BG_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (7) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) discretized with simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
-| <tt>Bg_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (8) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#references) discretized with simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
+| <tt>Bu</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (4) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#-references) | ![$\mathbf{B_u}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_u})|
+| <tt>BG</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (7) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#-references) | ![$\mathbf{B_G}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_G})|
+| <tt>Bg</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (8) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#-references) | ![$\mathbf{B_g}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B_g})|
+| <tt>Bu_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (4) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#-references) discretized with simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
+| <tt>BG_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (7) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#-references) discretized with simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
+| <tt>Bg_sim</tt> | State-space matrix ![$\mathbf{A}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{B}) of the store-and-forward model in equation (8) of [(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)](#-references) discretized with simulation cycle ![$T$](https://render.githubusercontent.com/render/math?math=\color{gray}T) | - |
 | <tt>C_z</tt> | State-space matrix ![$\mathbf{C}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{C}) of the store-and-forward model of the network | ![$\mathbf{C}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{C})|
-| <tt>E_DTUC_psi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy DTUC with decentralized configuration ![$\mathbf{\Psi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Psi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Psi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Psi}})|
-| <tt>E_DTUC_phi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy DTUC with decentralized configuration ![$\mathbf{\Phi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Phi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Phi}})|
-| <tt>E_D2TUC_psi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy D2TUC with decentralized configuration ![$\mathbf{\Psi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Psi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Psi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Psi}})|
-| <tt>E_D2TUC_phi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy D2TUC with decentralized configuration ![$\mathbf{\Phi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}) proposed in [(Pedroso and Batista, 2021)](#references) | ![$\mathbf{E_{\Phi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Phi}})|
+| <tt>E_DTUC_psi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy DTUC with decentralized configuration ![$\mathbf{\Psi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Psi}) proposed in [(Pedroso and Batista, 2021)](#-references) | ![$\mathbf{E_{\Psi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Psi}})|
+| <tt>E_DTUC_phi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy DTUC with decentralized configuration ![$\mathbf{\Phi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}) proposed in [(Pedroso and Batista, 2021)](#-references) | ![$\mathbf{E_{\Phi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Phi}})|
+| <tt>E_D2TUC_psi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy D2TUC with decentralized configuration ![$\mathbf{\Psi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Psi}) proposed in [(Pedroso and Batista, 2021)](#-references) | ![$\mathbf{E_{\Psi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Psi}})|
+| <tt>E_D2TUC_phi</tt> | Sparsity matrix of the controller gain for the decentralized control strategy D2TUC with decentralized configuration ![$\mathbf{\Phi}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}) proposed in [(Pedroso and Batista, 2021)](#-references) | ![$\mathbf{E_{\Phi}}$](https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{E_{\Phi}})|
 
 >Example: *Load the Chania urban road network provided in SAFFRON*
 >```
@@ -158,12 +160,12 @@ The **fields** of store-and-forward model object *struct* are
 
 #### Network properties
 <p align="justify">
-  It is possible to check if the traffic network is <b>open</b> and if it has a <b>minimum complete stage strategy</b>. These properties are defined with rigour in <a href="#references">(Pedroso and Batista, 2021)</a>. They are closely related with the controllability of the store-and-forward model.
+  It is possible to check if the traffic network is <b>open</b> and if it has a <b>minimum complete stage strategy</b>. These properties are defined with rigour in <a href="#-references">(Pedroso and Batista, 2021)</a>. They are closely related with the controllability of the store-and-forward model.
 </p>
 
-> A traffic network is said to be **open** if there is a directed walk starting at every link which a vehicle may follow to exit the network with non-zero probability. [(Pedroso and Batista, 2021)](#references)<br>
+> A traffic network is said to be **open** if there is a directed walk starting at every link which a vehicle may follow to exit the network with non-zero probability. [(Pedroso and Batista, 2021)](#-references)<br>
 
-> A traffic network is said to be **feasible** if it is **finite** and **open**. [(Pedroso and Batista, 2021)](#references)
+> A traffic network is said to be **feasible** if it is **finite** and **open**. [(Pedroso and Batista, 2021)](#-references)
 
 To check if the store-and-forward model <tt>model</tt> is open, thus fesible, the following command is used
 ```
@@ -201,7 +203,7 @@ and relative queue balance (RQB) <br>
 <img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathrm{RQB} = \sum_{k}\sum_{z=1}^Z\frac{x_z^2(k)}{x_{z,max}}" alt="$\mathrm{RQB} = \sum_{k}\sum_{z=1}^Z\frac{x_z^2(k)}{x_{z,max}}$">
 </p><br>
 <p align="justify">
-introcuced in <a href="#references">(Aboudolas, Papageorgiou, and Kosmatopoulos, 2009)</a> can be computed seamlessly with SAFFRON. 
+introcuced in <a href="#-references">(Aboudolas, Papageorgiou, and Kosmatopoulos, 2009)</a> can be computed seamlessly with SAFFRON. 
 Let <tt>xNL</tt> be a <img src="https://render.githubusercontent.com/render/math?math=\color{gray}Z\times N_{sim}" alt="$Z\times N_{sim}$"> array, where <img src="https://render.githubusercontent.com/render/math?math=\color{gray}N_{sim}" alt="$N_{sim}$"> is the number of cycles that were simulated of a model <tt>model</tt> with the nonlinear dynamiccs (See <a href="simulation-script">Simulation script</a> for a template to simulate the nonlinear dynamics and <a href="example">Example</a> for an example). The <img src="https://render.githubusercontent.com/render/math?math=\color{gray}k" alt="$k$">-th row of <tt>xNL</tt>, <i>i.e.</i> <tt>xNL(:,k)</tt>, is the column vector of the link occupancy at time <img src="https://render.githubusercontent.com/render/math?math=\color{gray}t = (k-1)T" alt="$t = (k-1)T$">. The command
 </p>
 
@@ -222,7 +224,7 @@ outputs the <tt>TTS</tt> (in veh h) and the <tt>RQB</tt> (in veh).
 ```
 
 <p align="justify">
-where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is a scalar, outputs the solution. For more details see <a href="#references">(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)</a>. The algorithm that is implemented is poposed in <a href="#references">(Helgason, Kennington, and Lall, 1980)</a>, it is detailled in the context of traffic signal control in <a href="#references">(Diakaki, 1999)</a>.
+where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is a scalar, outputs the solution. For more details see <a href="#-references">(Pedroso, Batista, Papageorgiou, and Kosmatopoulos, 2022)</a>. The algorithm that is implemented is poposed in <a href="#-references">(Helgason, Kennington, and Lall, 1980)</a>, it is detailled in the context of traffic signal control in <a href="#-references">(Diakaki, 1999)</a>.
   </p>
 
 >Example: *Quadratic continuous knapsack problem*
@@ -248,16 +250,16 @@ where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is
 
 ***
   
-## Contributing to SAFFRON
+## ✨ Contributing to SAFFRON
 
 ***
 
-## License
+## 📄 License
 [MIT License](https://github.com/decenter2021/SAFFRON/LICENSE)
 
 ***
 
-## References 
+## 💥 References 
 <p align="justify">
 <a href="https://doi.org/10.1016/j.trc.2008.10.002">Aboudolas, K., Papageorgiou, M. and Kosmatopoulos, E., 2009. Store-and-forward based methods for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 17(2), pp.163-174. doi:10.1016/j.trc.2008.10.002.</a>
   
