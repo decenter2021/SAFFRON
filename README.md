@@ -309,6 +309,17 @@ The simulation of the the D2TUC strategy with decentralized configuration <img s
   
 ## ✨ Contributing to SAFFRON
 
+The community is encouraged to contribute with 
+- Suggestions
+- Addition of tools
+- Implementations of signal control strategies
+
+To contribute to SAFFRON 
+
+- Open an issue ([tutorial on how to create an issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue))
+- Make a pull request ([tutorial on how to contribute to GitHub projects](https://docs.github.com/en/get-started/quickstart/contributing-to-projects))
+- Or, if you are not familiar with GitHub, [contact the authors](#-contact) 
+
 ***
 
 ## 📄 License
