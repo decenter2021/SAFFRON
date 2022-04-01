@@ -283,6 +283,28 @@ Note that using <tt>load</tt> it is possible to select only a fraction of the st
 
 ### Example
 
+Full source code of the application of SAFFRON to the implementation of
+
+- the well-known TUC strategy <a href="#-references">(Diakaki, 1999)</a>
+- two recent decentralized signal control strategies proposed in <a href="#-references">(Pedroso and Batista, 2021)</a>
+
+is provided in the folder <tt>Examples/PedrosoBatista2021</tt>.
+
+<p align="justify">
+To run this example place the simulation script and auxiliary <tt>.m</tt> files in <tt>Examples/PedrosoBatista2021</tt> in a directory with the SAFFRON source files. Alternatively, place the toolbox source files in a directory and <a href="https://www.mathworks.com/help/matlab/ref/addpath.html">add it to the MATLAB search path</a>.
+</p>
+
+>Example: *Run simulation example of <a href="#-references">(Pedroso and Batista, 2021)</a>*
+>```
+>>> simulation
+
+<p align="justify">
+The simulation of the the D2TUC strategy with decentralized configuration <img src="https://render.githubusercontent.com/render/math?math=\color{gray}\mathbf{\Phi}" alt= "$\Phi$">  using SAFFRON tools in the Chania urban road network that is provided has the following occupancy and green time evolution
+</p>
+
+![occupancy](https://user-images.githubusercontent.com/40807922/161295642-a5bc964e-345a-469a-9694-d7671a09639c.png)
+![green_times](https://user-images.githubusercontent.com/40807922/161295624-410759be-aefb-4fec-8f33-abc36e766092.png)
+  
 ***
   
 ## ✨ Contributing to SAFFRON
