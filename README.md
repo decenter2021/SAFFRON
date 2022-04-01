@@ -245,31 +245,13 @@ where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is
 SAFFRON toolbox also provides <tt>simulation_template.m</tt> template file for the simulation of a traffic signal control policy in MATLAB making use of the nonlinear model with upstream gating that is proposed in <a href="#-references">(Aboudolas, Papageorgiou, and Kosmatopoulos, 2009)</a>. For more tecnhical details see <a href="#-references">(Pedroso, Batista, Papageorgiou Kosmatopoulos, 2022)</a>.
 </p>
 
-There are 7 main 
+A control policy can be implemented seamlessly in this script by 
+- Setting the directory of the traffic network model
+- Setting the initial occupancy and demand
+- Synthesizing the novel control policy
+- Implementing the novel control policy, *i.e.*, compute the green-times of the stages as a function of the link occupancy
 
-##### Import urban road network model
-
-```Matlab
-% Import Chania network
-model = SFMSynthesis("ChaniaUrbanRoadModel");
-```
-
-##### Set different initial conditions and demand if desired
-
-```Matlab
-% Chania urban road model has initial condictions and demands for a
-% scenario. These can be used as a benchmark. To test different initial
-% conditions and demand scenarios simply make modifications to model.x0 and
-% model.d
-% For example:
-rng(1); % Seed for consistency
-% Set initial conditions
-model.x0 = 0.5*rand(model.Z,1).*model.capacity;
-% Set demand 
-model.d = zeros(model.Z,1);
-model.d(model.inLinks) = 0.1*model.saturation(model.inLinks).*rand(length(model.inLinks),1);
-model.d(model.notInLinks) = 0.01*model.saturation(model.notInLinks).*rand(length(model.notInLinks),1);
-```
+in the places indicated in the script. The template file <tt>simulation_template.m</tt> is well commented so that it is very easy to adapt the script.
 
 ### Chania urban road network
 
@@ -298,11 +280,6 @@ Note that using <tt>load</tt> it is possible to select only a fraction of the st
 ```
 >> chania = load('ChaniaUrbanRoadModel/data.mat','junctions','links');
 ```
-Thus, to implement a signal control startegy one one has to
-- Set the directory of the model traffic network
-- Sett the initial conditions and demand
-- Synthesize the control policy
-- Implement the control policy, *i.e.*, compute the green-times of the stages as a function of the link occupancy
 
 ### Example
 
