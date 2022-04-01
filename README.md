@@ -1,56 +1,67 @@
-# SAFFRON:<br><sub>Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB</sub>
+# SAFFRON:<br><sub>🚦Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB</sub>
 
 [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/decenter2021/SAFFRON/releases)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/decenter2021/SAFFRON/LICENSE)
 [![DOI:[not_published_yet]](https://zenodo.org/badge/DOI/not_published_yet.svg)](https://doi.org/not_published_yet.svg)
 
-## Features
-- Collection of tools for the **development** and **evaluation** of **store-and-forward** based strategies
+## 🎯 Features
+- Collection of open-source and well documented tools for the  **synthesis, analysis, and simulation** of **store-and-forward** models of **urban road networks** in MATLAB
 - Full model of the urban traffic network of the city center of **Chania, Greece**
 - Implementation of **state-of-the-art** traffic responsive signal control strategies
 
 ***
+## 🚀 Index
 
-## Index
-
-- [Description](#description)
-- [Authors](#authors)
-- [Contact](#contact)
-- [Documentation](#documentation)
+- [Description](#-description)
+- [Authors](#-authors)
+- [Contact](#-contact)
+- [Documentation](#-documentation)
 - [Contributing to SAFFRON](#contributing-to-saffron)
 - [Lincense](#license)
 - [References](references)
 
 ***
 
-## Description
+## 💡 Description
 <p align="justify">
+
+The SAFFRON toolbox is introduced to **synthesize, analyze, and simulate store-and-forward** based strategies for the signal control problem in congested urban road networks in **MATLAB**. SAFFRON is tecnhically described in 
+  
+<a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]</a>
+  
+If you use SAFFRON, reference the publication above.
+
 [link to article- description of store and forward there]
 [if use cite ]
-[Add brief description and motivation]
-[say documentation below]
-[probably add an index with links to the sections below]
+
+  [A dd brief description and motivation]
+  [say documentation below]
 </p>
 
 ***
 
-## Authors 
-Leonardo Pedroso<sup>1</sup> (<a href="https://github.com/leonardopedroso">GitHub</a>, <a href="https://scholar.google.com/citations?user=W7_Gq-0AAAAJ">Google Scholar</a>, <a href="https://orcid.org/0000-0002-1508-496X">ORCID</a>)<br>
-Pedro Batista<sup>1</sup> (<a href="https://scholar.google.com/citations?user=6eon48IAAAAJ">Google Scholar</a>, <a href="https://orcid.org/0000-0001-6079-0436"> ORCID</a>)<br>
-Markos Papageorgiou<sup>2</sup> (<a href="https://scholar.google.com/citations?user=sr8TOTQAAAAJ">Google Scholar</a>, <a href="https://orcid.org/0000-0001-5821-4982"> ORCID</a>)<br>
-Elias Kosmatopoulos<sup>3</sup> (<a href="https://scholar.google.com/citations?user=LIRR8B8AAAAJ">Google Scholar</a>, <a href="https://orcid.org/0000-0002-3735-4238"> ORCID</a>)<br>
+## ✍🏼 Authors 
+Leonardo Pedroso<sup>1</sup> <a href="https://github.com/leonardopedroso"><img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a> <a href="https://scholar.google.com/citations?user=W7_Gq-0AAAAJ"><img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/google_scholar_icon_130918.png" style="width:1em;margin-right:.5em;"></a> <a href="https://orcid.org/0000-0002-1508-496X"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a><br>
+Pedro Batista<sup>1</sup> <a href="https://scholar.google.com/citations?user=6eon48IAAAAJ"><img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/google_scholar_icon_130918.png" style="width:1em;margin-right:.5em;"></a> <a href="https://orcid.org/0000-0001-6079-0436"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a><br>
+Markos Papageorgiou<sup>2</sup> <a href="https://scholar.google.com/citations?user=sr8TOTQAAAAJ"><img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/google_scholar_icon_130918.png" style="width:1em;margin-right:.5em;"></a> <a href="https://orcid.org/0000-0001-5821-4982"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a><br>
+Elias Kosmatopoulos<sup>3</sup> <a href="https://scholar.google.com/citations?user=LIRR8B8AAAAJ"><img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/google_scholar_icon_130918.png" style="width:1em;margin-right:.5em;"></a> <a href="https://orcid.org/0000-0002-3735-4238"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a><br>
 <sub>*<sup>1</sup>Institute for Systems and Robotics, Instituto Superior Técnico, Universidade de Lisboa, Portugal<br>
   <sup>2</sup>Dynamic Systems and Simulation Laboratory, Technical University of Crete, GR-73100 Chania, Greece<br>
   <sup>3</sup>Department of Electrical and Computer Engineering, Democritus University of Thrace, Xanthi, Greece<br>*</sub>
 
+
+
+
+
 ***
 
-## Contact
+## 📞 Contact
 SAFFRON toolbox is currently maintained by Leonardo Pedroso (<a href="mailto:leonardo.pedroso@tecnico.ulisboa.pt">leonardo.pedroso@tecnico.ulisboa.pt</a>).
 
+
 ***
 
-## Documentation
+## 📖 Documentation
 The documentation is divided into the following categories:
 - [Model synthesis](#model-synthesis)
 - [Utilities](#utilities)
@@ -253,9 +264,9 @@ where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is
 <a href="https://www.researchgate.net/profile/Christina-Diakaki/publication/270751666_Integrated_Control_of_Traffic_Flow_in_Corridor_Networks/links/569902fc08ae748dfaff351f/Integrated-Control-of-Traffic-Flow-in-Corridor-Networks.pdf">Diakaki, C., 1999. Integrated control of traffic flow in corridor networks. Ph. D. Thesis.</a>
  
 <a href="https://doi.org/10.1007/BF01588328">Helgason, R., Kennington, J. and Lall, H., 1980. A polynomially bounded algorithm for a singly constrained quadratic program. Mathematical Programming, 18(1), pp.338-343. doi:10.1007/BF01588328.</a>
-
   
 <a href="https://doi.org/10.1016/j.trc.2021.103412">Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward based strategies for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 132, p.103412. doi:10.1016/j.trc.2021.103412.</a>
-  
-Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]
+
+<a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]</a>
+
 </p>
