@@ -8,7 +8,7 @@
 %% Initilalize workspace
 clear;
 
-%% Import LTI model of urban raod network
+%% Import urban road network model
 % Import Chania network
 model = SFMSynthesis("ChaniaUrbanRoadModel");
 
@@ -17,7 +17,6 @@ model = SFMSynthesis("ChaniaUrbanRoadModel");
 % scenario. These can be used as a benchmark. To test different initial
 % conditions and demand scenarios simply make modifications to model.x0 and
 % model.d
-
 % For example:
 rng(1); % Seed for consistency
 % Set initial conditions
