@@ -244,9 +244,33 @@ where <tt>a</tt>,<tt>b</tt>, and <tt>d</tt> are column vectors and <tt>c</tt> is
 
 ### Chania urban road network
 
-### Example
+<p align="justify">
+The model of the urban traffic network of the city center of Chania, Greece is provided. This model has been extensively used by the DSSLab <a href="#-references">(Diakaki, 1999)</a>, <a href="#-references">(Aboudolas, Papageorgiou, Kosmatopoulos, 2009)</a>.
+</p>
 
-[probably use a different section name]
+The Chania urban traffic network, consists of 16 signalized junctions and 60 links
+
+<img src="https://user-images.githubusercontent.com/40807922/161239424-79df7877-7ba5-45b5-b4f5-8a0165f4f31f.png" alt="ChaniaUrbanRoadModelGraph"/>
+
+The model data in enclosed in the folder <a href="https://github.com/decenter2021/SAFFRON/tree/master/ChaniaUrbanRoadModel"><tt>ChaniaUrbanRoadModel</tt></a> includes
+- model paramenters in a spreadsheet that follows the provided [template](#model-synthesis) and associated *txt* files 
+- model paramenters in the MAT-fite <tt>data.mat</tt>
+- the image above of the topology of the network
+
+To load the Chania urban road model one ca either syntheize the parameters from the spreadsheet running
+```
+>> chania = SFMSynthesis('ChaniaUrbanRoadModel');
+```
+or load the MAT-file running
+```
+>> chania = load('ChaniaUrbanRoadModel/data.mat');
+```
+Note that using <tt>load</tt> it is possible to select only a fraction of the struct fields, *i.e.*
+```
+>> chania = load('ChaniaUrbanRoadModel/data.mat','junctions','links');
+```
+
+### Example
 
 ***
   
