@@ -324,7 +324,7 @@ To contribute to SAFFRON
 ***
 
 ## 📄 License
-[MIT License](https://github.com/decenter2021/SAFFRON/LICENSE)
+[MIT License](https://github.com/decenter2021/SAFFRON/blob/master/LICENSE)
 
 ***
 
