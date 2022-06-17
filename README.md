@@ -27,8 +27,13 @@
   The SAFFRON toolbox is introduced to <b>synthesize, analyze, and simulate store-and-forward</b> based strategies for the signal control problem in congested urban road networks in <b>MATLAB</b>. SAFFRON is tecnhically described in 
 </p>
 
-<a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]</a>
+<p align="justify">
+<a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2021. SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB (accepted for presentation at the 25th IEEE Intelligent Transportation Systems Conference (ITSC 2022))</a>
+</p>
   
+[Submitted version](https://github.com/decenter2021/SAFFRON/files/8926836/submitted_version.pdf)
+
+
 If you use SAFFRON, reference the publication above.
 
 SAFFRON allows to:
