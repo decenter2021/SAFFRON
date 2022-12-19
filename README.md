@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/decenter2021/SAFFRON/releases)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/decenter2021/SAFFRON/LICENSE)
-[![DOI:[not_published_yet]](https://zenodo.org/badge/DOI/not_published_yet.svg)](https://doi.org/not_published_yet.svg)
+[![DOI:[not_published_yet]](https://zenodo.org/badge/DOI/10.1109/ITSC55140.2022.9922508.svg)](https://doi.org/10.1109/ITSC55140.2022.9922508.svg)
 
 ## 🎯 Features
 - Collection of open-source and well documented tools for the  **synthesis, analysis, and simulation** of **store-and-forward** models of **urban road networks** in MATLAB
@@ -28,10 +28,10 @@
 </p>
 
 <p align="justify">
-<a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2021. SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB (accepted for presentation at the 25th IEEE Intelligent Transportation Systems Conference (ITSC 2022))</a>
+<a href="https://ieeexplore.ieee.org/abstract/document/9922508">L. Pedroso, P. Batista, M. Papageorgiou, and E. Kosmatopoulos, SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB’, in 2022 IEEE 25th International Conference on Intelligent Transportation Systems (ITSC), 2022, pp. 3698– 3703. doi: 10.1109/ITSC55140.2022.9922508.</a>
 </p>
   
-[Submitted version](https://github.com/decenter2021/SAFFRON/files/8926836/submitted_version.pdf)
+[[Accepted version]](http://web.tecnico.ulisboa.pt/ist189691/publications/2022_11_pedroso_saffron_itsc_goa.pdf)
 
 
 If you use SAFFRON, reference the publication above.
