@@ -37,4 +37,5 @@ octave-workspace
 # MS Excel hidden files
 *\~$*.xlsx
 
-
+# To do list
+todo.txt

@@ -4,8 +4,13 @@
 % Kosmatopoulos 
 % LICENSE: MIT License
 % If you use SAFFRON, reference the publication below
-%   Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022
-%   [not published yet]
+% 
+% L. Pedroso, P. Batista, M. Papageorgiou and E. Kosmatopoulos, 
+% 'SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal 
+% control in MATLAB', 2022 IEEE 25th International Conference on 
+% Intelligent Transportation Systems (ITSC), pp. 3698-3703, 2022. 
+% doi: 10.1109/ITSC55140.2022.9922508.
+%
 % -------------------------------------------------------------------------
 
 %% Description - Traffic Network Control
