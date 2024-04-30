@@ -18,7 +18,7 @@
 % Congested Urban Road Networks
 % Simulation results of:
 %
-% L. Pedroso, P. Batista, and M. Papageorgiou and E. Kosmatopoulos, 
+% L. Pedroso, P. Batista, and M. Papageorgiou, 
 % 'Feedback-feedforward Signal Control with Exogenous Demand Estimation in 
 % Congested Urban Road Networks' (under review)
 %
@@ -28,7 +28,7 @@ clear;
 
 %% Import LTI model of Chania network
 model = SFMSynthesis("ChaniaUrbanRoadModel");
-% Change cycle time to 100s (so that the estimator smapling time is an integer multiple)
+% Change cycle time to 100s (so that the estimator sampling time is an integer multiple)
 model.C = 100;
 model.Bu = model.Bu*(100/90);
 model.BG = model.Bu*(100/90);
@@ -38,21 +38,6 @@ model.Bg = model.Bg*(100/90);
 % Set initial conditions
 rng(0); % Seed for consistency
 model.x0 = 0.05*(0.2*rand(model.Z,1)+0.8).*model.capacity;
-% Set demand 
-model.d = zeros(model.Z,1);
-model.d(model.inLinks) = 0.1*model.saturation(model.inLinks).*(0.2*rand(length(model.inLinks),1)+0.5);
-model.d(model.notInLinks) = 0.005*model.saturation(model.notInLinks).*(0.2*rand(length(model.notInLinks),1)+0.8);
-
-%% Set demand variation model 
-d_model_A = (rand(size(model.d))*0.5+0.25).*model.d; % Amplitude is 0.25-0.75 of nominal demand
-d_model_phase = rand(size(model.d))*2*pi; 
-d_model_T = (rand(size(model.d))*90+30)*60; % Period between 30 min and 2h (in seconds)
-d_model_dt_fall = 2*60*60; 
-d_model_spike_N_links = 2;
-d_model_spike_links = [21 51];%round((model.Z-1)*rand(1,d_model_spike_N_links))+1;
-d_model_spike_mag_of_sat = [0.35 0.35];
-d_model_spike_t = (rand(d_model_spike_N_links,1)+1.5)*60*60;
-d_model_spike_dt = 1.5*60*60;
 
 %% Modal decomposition
 % Separation of controllable and uncontrolable modes
@@ -80,7 +65,7 @@ K = K1*([eye(r) zeros(r,Z-r)]/W);
 Acl = eye(r)-Bg1_hat*K1;
 Kd1 = (Bg1_hat'*P*Bg1_hat+R_TUC)\Bg1_hat'*inv(eye(r)-Acl')*P;
 Kd = Kd1*([eye(r) zeros(r,Z-r)]/W);
-gN_TUC = - model.C*Kd*model.d;
+% gN_TUC = - model.C*Kd*model.d;
 
 %% Kalman filter synthesis
 % Estimation
@@ -114,18 +99,53 @@ end
 
 %% Nonlinear simulation
 controlStrat = 4; % Number of control strategies to simulate
-nDisc = (8*60*60-d_model_dt_fall)/model.C; % Number of discrete control time steps to simulate
-tspan = (0:model.Tsim:nDisc*model.C+d_model_dt_fall); % (s) 
+nDisc = 2*60*60/model.C; % Number of discrete control time steps to simulate
+tspan = (0:model.Tsim:nDisc*model.C); % (s) 
 xNL = cell(controlStrat,1);
 xDisc = cell(controlStrat,1);
 dNL = cell(controlStrat,1); 
 gNL = cell(controlStrat,1);
 uNL = cell(controlStrat,1);
 uNL_hat = cell(controlStrat,1);
+
+
+%% Set demand variation model 
+% Compute demand variation for "Real-world measurement example for the
+% variation of dz(k) during a 120-min time window (weekday afternoon)"
+% Fit from [3] Fig. 2
+fit_data_x = (0:5:60)/60;
+fit_data_y = [80 90 95 130 150 160 165 150 145 130 115 100 85];
+d_fit = polyfit(fit_data_x,fit_data_y,6);
+y_fit = polyval(d_fit,0:1/1000:1);
+d_fit = d_fit/mean(y_fit);
+
+% Parameters for the variation
+d_model_A = 0.25; 
+d_model_spike_N_links = 3;
+d_model_spike_links = [7 20 22];
+d_model_spike_mag_of_d = [5 15 30]; %[5 15 15];
+d_model_dt_fall = 0;
+d_model_spike_t = ones(3,1)*(0.75)*60*60;%(rand(d_model_spike_N_links,1)+1.5)*60*60;
+d_model_spike_dt = 1*60*60;
+
+% Compute realistic demand
+d_noise = mvnrnd(zeros(1,model.Z),eye(model.Z),length(tspan))';
+d_noise = bandpass(d_noise',[1/(60*10) 1/(60*2)],1/model.Tsim)';
+d_wo_noise = model.d*polyval(d_fit,tspan/(tspan(end)));
+d_wo_noise_peak = d_wo_noise;
+d = d_wo_noise.*(1+d_model_A*d_noise);
+for i = 1:length(d_model_spike_links)
+    d_peak = model.d(d_model_spike_links(i)).*(d_model_spike_mag_of_d(i)-2).*exp(-((tspan-d_model_spike_t(i))/(0.25*d_model_spike_dt)).^2);
+    d(d_model_spike_links(i),:) = d(d_model_spike_links(i),:) + d_peak;
+    d_wo_noise_peak(d_model_spike_links(i),:) = d_wo_noise_peak(d_model_spike_links(i),:) + d_peak;
+end
+
+
+%% Simulate
 % Demand
-d = zeros(size(model.d,1),length(tspan));
 blocked_veh_links = zeros(model.Z,controlStrat);
 blocked_veh = cell(controlStrat,1);
+
 % Estimation
 xhat = cell(controlStrat,1);
 uhat = cell(controlStrat,1);
@@ -157,7 +177,7 @@ end
 for  m = 1:controlStrat
     % Initialize demand and initial state
     xNL{m,1}(:,1) = model.x0;
-    d(:,1) = model.d + d_model_A.*sin(d_model_phase);
+    %d(:,1) = model.d + d_model_A.*sin(d_model_phase);
     for k = 1:length(tspan)-1
         %% Estimation
         if ~rem(int16(k-1),T_est_Tsim) && (m == 3 || m == 4)
@@ -237,16 +257,19 @@ for  m = 1:controlStrat
             switch m 
                 case 1 % TUC nom. d, perf. feed
                 gNL{m,1}(:,idivide(int16(k-1),int16(model.C/model.Tsim))+1) =...
-                    LQcontrolAction(xD,K,model,gN_TUC);                
-                case 2 % TUC perf. d, perf. feed                 
+                    LQcontrolAction(xD,K,model,-model.C*Kd*d_wo_noise(:,k));     
+                    % LQcontrolAction(xD,K,model,gN_TUC);                
+                case 2 % TUC-FF perf. d, perf. feed                 
                 gNL{m,1}(:,idivide(int16(k-1),int16(model.C/model.Tsim))+1) =...
-                    LQcontrolAction(xD,K,model,-model.C*Kd*d(:,k));                              
-                case 3 % TUC est. d, est. feed
+                    LQcontrolAction(xD,K,model,-model.C*Kd*d_wo_noise_peak(:,k));  
+                    % LQcontrolAction(xD,K,model,-model.C*Kd*d(:,k));
+                case 3 % TUC-FF est. d, est. feed
                 gNL{m,1}(:,idivide(int16(k-1),int16(model.C/model.Tsim))+1) =...
                     LQcontrolAction(sat(xhat{m,1}(:,k_disc),0,model.capacity),K,model,-model.C*Kd*dhat{m,1}(:,k_disc));    
                 case 4 % TUC nom. d, est. feed
                 gNL{m,1}(:,idivide(int16(k-1),int16(model.C/model.Tsim))+1) =...
-                    LQcontrolAction(sat(xhat{m,1}(:,k_disc),0,model.capacity),K,model,gN_TUC);
+                    LQcontrolAction(sat(xhat{m,1}(:,k_disc),0,model.capacity),K,model,-model.C*Kd*d_wo_noise(:,k));
+                    % LQcontrolAction(sat(xhat{m,1}(:,k_disc),0,model.capacity),K,model,gN_TUC);
             end
         end
 
@@ -286,17 +309,17 @@ for  m = 1:controlStrat
            break;
         end
         
-        %% Exogenous demand generation
-        % Next intant demand 
-        d(:,k+1) = model.d + d_model_A.*sin(k*model.Tsim*2*pi./d_model_T +d_model_phase);
-        for i = 1:d_model_spike_N_links
-            if tspan(k+1) >= d_model_spike_t(i) && tspan(k+1) <= d_model_spike_t(i) + d_model_spike_dt
-                d(d_model_spike_links(i),k+1) = model.saturation(d_model_spike_links(i))*d_model_spike_mag_of_sat(i);
-            end
-        end
-        if tspan(k+1) > tspan(end)-d_model_dt_fall
-            d(:,k+1) = d(:,k+1)*exp(-(tspan(k+1)-(tspan(end)-d_model_dt_fall))/(d_model_dt_fall/4));
-        end
+        % %% Exogenous demand generation
+        % % Next intant demand 
+        % d(:,k+1) = model.d + d_model_A.*sin(k*model.Tsim*2*pi./d_model_T +d_model_phase);
+        % for i = 1:d_model_spike_N_links
+        %     if tspan(k+1) >= d_model_spike_t(i) && tspan(k+1) <= d_model_spike_t(i) + d_model_spike_dt
+        %         d(d_model_spike_links(i),k+1) = model.d(d_model_spike_links(i))*d_model_spike_mag_of_d(i);
+        %     end
+        % end
+        % if tspan(k+1) > tspan(end)-d_model_dt_fall
+        %     d(:,k+1) = d(:,k+1)*exp(-(tspan(k+1)-(tspan(end)-d_model_dt_fall))/(d_model_dt_fall/4));
+        % end
              
     end
 end
@@ -312,12 +335,15 @@ for  m = 1:controlStrat
 end
 TTS'
 RQB'
-sum(blocked_veh_links)
 overall_blocked_veh'
+sum(blocked_veh_links)
 
 %% Plots
 
-% Demand
+d_model_spike_link_plot = 3;
+
+% Demand (z = 21)
+link = 8;
 figure('Position',3*[0 0 192 144]);
 hold on;
 grid on;
@@ -325,22 +351,54 @@ box on;
 set(gca,'FontSize',20);
 set(gca, 'Layer', 'top');
 set(gca,'TickLabelInterpreter','latex');
-for i = [12 33 39 d_model_spike_links]
-    plot(tspan/(60*60),d(i,:),'LineWidth',3);   
+for i = link %[12 33 39 d_model_spike_links]
+    plot(tspan/(60*60),(60*60)*d(i,:),'LineWidth',3); 
     %plot(tspan(1:end-1)/(60*60),dNL{1,1}(i,:),'--k','LineWidth',1);
 end
-for i = [12 33 39 d_model_spike_links]
-    plot(tspan/(60*60),model.d(i)*ones(size(tspan/(60*60))),'--k','LineWidth',2);
+for i = link %[12 33 39 d_model_spike_links]
+    % plot(tspan/(60*60),model.d(i)*ones(size(tspan/(60*60))),'--k','LineWidth',2);
+    plot(tspan/(60*60),(60*60)*d_wo_noise(i,:),'--k','LineWidth',2); 
+    plot(tspan/(60*60),(60*60)*1.25*d_wo_noise(i,:),'--k','LineWidth',2); 
+    plot(tspan/(60*60),(60*60)*0.75*d_wo_noise(i,:),'--k','LineWidth',2); 
 end
-legend({'$z=12$','$z=33$','$z=39$','$z=21$','$z=51$','$e_z^{\mathrm{\,hist}}$'}, 'Interpreter','latex');
-ylabel("$e_z \quad [\mathrm{veh}\;\mathrm{s}^{-1}]$",'Interpreter','latex');
+ylim([0 (60*60)*1.2*max(d(i,:))])
+legend({'$$e_z$','$e_z^{\mathrm{\,hist}}$','$1.25e_z^{\mathrm{\,hist}}$','$0.75e_z^{\mathrm{\,hist}}$'}, 'Interpreter','latex');
+ylabel(sprintf("$e_z \\quad [\\mathrm{veh}\\;\\mathrm{h}^{-1}] \\quad (z = %d)$",link),'Interpreter','latex');
 xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/d08_sc2.pdf');
 hold off;
-% saveas(gcf,'./d_sc1.eps','epsc');
 
-% Estimation occupancy of link 21
+%% Demand (z = 21)
+link = 20;
+figure('Position',3*[0 0 192 144]);
+hold on;
+grid on;
+box on;
+set(gca,'FontSize',20);
+set(gca, 'Layer', 'top');
+set(gca,'TickLabelInterpreter','latex');
+for i = link %[12 33 39 d_model_spike_links]
+    plot(tspan/(60*60),(60*60)*d(i,:),'LineWidth',3); 
+    %plot(tspan(1:end-1)/(60*60),dNL{1,1}(i,:),'--k','LineWidth',1);
+end
+for i = link %[12 33 39 d_model_spike_links]
+    % plot(tspan/(60*60),model.d(i)*ones(size(tspan/(60*60))),'--k','LineWidth',2);
+    plot(tspan/(60*60),(60*60)*d_wo_noise(i,:),'--k','LineWidth',2); 
+    plot(tspan/(60*60),(60*60)*1.25*d_wo_noise(i,:),'--k','LineWidth',2); 
+    plot(tspan/(60*60),(60*60)*0.75*d_wo_noise(i,:),'--k','LineWidth',2); 
+end
+ylim([0 (60*60)*1.2*max(d(i,:))])
+legend({'$$e_z$','$e_z^{\mathrm{\,hist}}$','$1.25e_z^{\mathrm{\,hist}}$','$0.75e_z^{\mathrm{\,hist}}$'}, 'Interpreter','latex');
+ylabel(sprintf("$e_z \\quad [\\mathrm{veh}\\;\\mathrm{h}^{-1}] \\quad (z = %d)$",link),'Interpreter','latex');
+xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/d20_sc2.pdf');
+hold off;
+
+%% Estimation occupancy of link 20
 m = 3;
-link = 21;
+link = 20;%d_model_spike_links(d_model_spike_link_plot);
 figure('Position',3*[0 0 192 144]);
 hold on;
 grid on;
@@ -354,14 +412,15 @@ for i = link %d_model_spike_links(1) %[15 40 38 41 16 17]
     plot(tspan/(60*60),xNL{m,1}(i,:)./model.capacity(i),'LineWidth',2);
 end
 legend({'$y_z$','$\hat{x}_z$','$x_z$'}, 'Interpreter','latex');
-ylabel("$\hat{x}_z/x_{z,max} \quad (z = 21)$",'Interpreter','latex');
+ylabel(sprintf("$\\hat{x}_z/x_{z,max} \\quad (z = %d)$",link),'Interpreter','latex');
 xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/x_hat_sc2.pdf');
 hold off;
-% saveas(gcf,'./x_hat_sc1.eps','epsc');
 
-% Estimation exogenous demand of link 21
+%% Estimation exogenous demand of link 20
 m = 3;
-link = 21;
+link = 20; %d_model_spike_links(d_model_spike_link_plot);
 figure('Position',3*[0 0 192 144]);
 hold on;
 grid on;
@@ -375,12 +434,13 @@ for i = link %d_model_spike_links(1) %[15 40 38 41 16 17]
     plot(tspan(1:end-1)/(60*60),dNL{m,1}(i,:),'LineWidth',3);
 end
 legend({'$\hat{e}_z$','$e_z$'}, 'Interpreter','latex');
-ylabel("$e_z \quad [\mathrm{veh}\;\mathrm{s}^{-1}] \quad (z = 21)$",'Interpreter','latex');
+ylabel(sprintf("$e_z \\quad [\\mathrm{veh}\\;\\mathrm{s}^{-1}] \\quad (z = %d)$",link),'Interpreter','latex');
 xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/d_hat_sc2.pdf');
 hold off;
-% saveas(gcf,'./d_hat_sc1.eps','epsc');
 
-% Occupancy
+%% Occupancy
 figure('Position',3*[0 0 192 144]);
 hold on;
 grid on;
@@ -396,11 +456,11 @@ legend({'TUC ideal', 'TUC-FF ideal', 'TUC-FF','TUC'},'Interpreter','latex');
 %legend({'TUC nom. $d$, perf. $x$', 'TUC perf. $d$, perf. $x$', 'TUC est. $d$, est. $x$','TUC nom. $d$, est. $x$'},'Interpreter','latex');
 ylabel("$\sum_i [\mathbf{x}]_i\quad \mathrm{veh}$",'Interpreter','latex');
 xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/sum_x_sc2.pdf');
 hold off;
-% saveas(gcf,'./sum_x_sc1.eps','epsc');
 
-
-% Green-times junction 8
+%% Green-times junction 3
 figure('Position',3*[0 0 192 144]);
 hold on;
 grid on;
@@ -411,7 +471,9 @@ set(gca,'TickLabelInterpreter','latex');
 colors = [0, 0.4470, 0.7410;...
           0.8500, 0.3250, 0.0980;...
           0.9290, 0.6940, 0.1250];
-stages_plt = model.junctions{8};
+junction = model.links(d_model_spike_links(d_model_spike_link_plot),1);
+if junction ~= 0
+stages_plt = model.junctions{junction};
 for i = 1:length(stages_plt)
     for m = 3:4
         r = plot((0:model.Tsim/100:nDisc*model.C+d_model_dt_fall-model.Tsim/2)/(60*60),gNL{m,1}(stages_plt(i),idivide(int16(((model.Tsim/2:model.Tsim/100:nDisc*model.C+d_model_dt_fall))/model.Tsim-1),int16(model.C/model.Tsim))+1),'LineWidth',3);
@@ -419,13 +481,16 @@ for i = 1:length(stages_plt)
         if m == 4, r.LineStyle = '--'; end
     end
 end
-legend('$s=19$ (TUC-FF)', '$s=19$ (TUC)', '$s=20$ (TUC-FF)', '$s=20$ (TUC)','Interpreter','latex');
+% ylim([30 50])
+legend('$s=6$ (TUC-FF)', '$s=6$ (TUC)', '$s=7$ (TUC-FF)', '$s=7$ (TUC)','Interpreter','latex');
 ylabel("$g_s \quad (\mathrm{s})$",'Interpreter','latex');
 xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/g3_sc2.pdf');
 hold off;
-% saveas(gcf,'./g8_sc1.eps','epsc');
+end
 
-% Green-times junction 6
+%% Green-times junction 6
 figure('Position',3*[0 0 192 144]);
 hold on;
 grid on;
@@ -436,21 +501,23 @@ set(gca,'TickLabelInterpreter','latex');
 colors = [0, 0.4470, 0.7410;...
           0.8500, 0.3250, 0.0980;...
           0.9290, 0.6940, 0.1250];
-stages_plt = model.junctions{6};
+junction = model.links(d_model_spike_links(d_model_spike_link_plot),2);
+stages_plt = model.junctions{7};
 for i = 1:length(stages_plt)
-for m = 3:4
-        r = plot((0:model.Tsim/100:nDisc*model.C+d_model_dt_fall-model.Tsim/2)/(60*60),gNL{m,1}(stages_plt(i),idivide(int16(((model.Tsim/2:model.Tsim/100:nDisc*model.C+d_model_dt_fall))/model.Tsim-1),int16(model.C/model.Tsim))+1),'LineWidth',2);
+    for m = 3:4
+        r = plot((0:model.Tsim/100:nDisc*model.C+d_model_dt_fall-model.Tsim/2)/(60*60),gNL{m,1}(stages_plt(i),idivide(int16(((model.Tsim/2:model.Tsim/100:nDisc*model.C+d_model_dt_fall))/model.Tsim-1),int16(model.C/model.Tsim))+1),'LineWidth',3);
         %if m == 4, r.Color = colors(i,:)+0.4*(1-colors(i,:)); end
         r.Color = colors(i,:);
-        if m == 3, r.Color = [colors(i,:) 0.5] ; end
+        % if m == 3, r.Color = [colors(i,:) 0.5] ; end
         if m == 4, r.LineStyle = '--'; end
     end
 end
-legend('$s=14$ (TUC-FF)', '$s=14$ (TUC)', '$s=15$ (TUC-FF)', '$s=15$ (TUC)', '$s=16$ (TUC-FF)', '$s=16$ (TUC)','Interpreter','latex');
+legend('$s=17$ (TUC-FF)', '$s=18$ (TUC)', '$s=17$ (TUC-FF)', '$s=18$ (TUC)','Interpreter','latex');
 ylabel("$g_s \quad (\mathrm{s})$",'Interpreter','latex');
 xlabel('hours','Interpreter','latex');
+% set(gcf,'renderer','Painters');
+% exportgraphics(gcf,'./figures/g7_sc2.pdf');
 hold off;
-% saveas(gcf,'./g6_sc1.eps','epsc');
 
 %% Auxiliary functions
 
@@ -516,3 +583,6 @@ end
 % Store-and-forward based methods for the signal control problem in 
 % large-scale congested urban road networks. Transp. Res. C 17 (2), 163?174.
 
+% [3] Tettamanti, T., Luspay, T., Kulcsar, B., Péni, T. and Varga, I., 
+% 2013. Robust control for urban road traffic networks. IEEE Transactions 
+% on Intelligent Transportation Systems, 15(1), pp.385-398.
