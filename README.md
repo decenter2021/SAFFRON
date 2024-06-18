@@ -28,13 +28,24 @@
 </p>
 
 <p align="justify">
-<a href="https://ieeexplore.ieee.org/abstract/document/9922508">L. Pedroso, P. Batista, M. Papageorgiou, and E. Kosmatopoulos, SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB’, in 2022 IEEE 25th International Conference on Intelligent Transportation Systems (ITSC), 2022, pp. 3698– 3703. doi: 10.1109/ITSC55140.2022.9922508.</a>
+<a href="https://ieeexplore.ieee.org/abstract/document/9922508">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022. SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB. 2022 IEEE 25th International Conference on Intelligent Transportation Systems (ITSC), pp. 3698-3703. doi:10.1109/ITSC55140.2022.9922508.</a>
 </p>
-  
+
 [[Accepted version]](http://web.tecnico.ulisboa.pt/ist189691/publications/2022_11_pedroso_saffron_itsc_goa.pdf)
 
 
 If you use SAFFRON, reference the publication above.
+
+~~~BibTeX
+@inproceedings{PedrosoBatistaEtAl2022Saffron,
+	author = {Leonardo Pedroso and Pedro Batista and Markos Papageorgiou and Elias Kosmatopoulos},
+	title = {{SAFFRON}: {Store-And-Forward} model toolbox {For} urban {ROad} {Network} signal control in {MATLAB}},
+	booktitle = {2022 IEEE 25th International Conference on Intelligent Transportation Systems (ITSC)},
+	year = {2022},
+	pages = {3698-3703},
+	doi = {10.1109/ITSC55140.2022.9922508}
+}
+~~~
 
 SAFFRON allows to:
 - Seamlessly simulate store-and-forward based signal control strategies
@@ -335,6 +346,9 @@ To contribute to SAFFRON
 
 ## 💥 References 
 <p align="justify">
+
+<a href="https://ieeexplore.ieee.org/abstract/document/9922508">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E., 2022. SAFFRON: Store-And-Forward model toolbox For urban ROad Network signal control in MATLAB. 2022 IEEE 25th International Conference on Intelligent Transportation Systems (ITSC), pp. 3698-3703. doi:10.1109/ITSC55140.2022.9922508.</a>
+  
 <a href="https://doi.org/10.1016/j.trc.2008.10.002">Aboudolas, K., Papageorgiou, M. and Kosmatopoulos, E., 2009. Store-and-forward based methods for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 17(2), pp.163-174. doi:10.1016/j.trc.2008.10.002.</a>
   
 <a href="https://www.researchgate.net/profile/Christina-Diakaki/publication/270751666_Integrated_Control_of_Traffic_Flow_in_Corridor_Networks/links/569902fc08ae748dfaff351f/Integrated-Control-of-Traffic-Flow-in-Corridor-Networks.pdf">Diakaki, C., 1999. Integrated control of traffic flow in corridor networks. Ph. D. Thesis.</a>
@@ -343,6 +357,6 @@ To contribute to SAFFRON
   
 <a href="https://doi.org/10.1016/j.trc.2021.103412">Pedroso, L. and Batista, P., 2021. Decentralized store-and-forward based strategies for the signal control problem in large-scale congested urban road networks. Transportation Research Part C: Emerging Technologies, 132, p.103412. doi:10.1016/j.trc.2021.103412.</a>
 
-<a href="">Pedroso, L., Batista, P., Papageorgiou, M. and Kosmatopoulos, E. [not published yet]</a>
+
 
 </p>
